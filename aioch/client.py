@@ -79,7 +79,7 @@ class Client(object):
             types_check=False, columnar=False):
 
         if params is not None:
-            query = self._client.substitute_params(query, params)
+            query = self._client.substitute_params(query, params, context=self._client.connection.context)
 
         await self.run_in_executor(
             self._client.connection.send_query, query, query_id=query_id
@@ -100,7 +100,7 @@ class Client(object):
             types_check=False):
 
         if params is not None:
-            query = self._client.substitute_params(query, params)
+            query = self._client.substitute_params(query, params, context=self._client.connection.context)
 
         await self.run_in_executor(
             self._client.connection.send_query, query, query_id=query_id
